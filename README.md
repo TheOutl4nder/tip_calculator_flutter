@@ -13,9 +13,8 @@ flutter packages get
 
 ## App Screenshot
 
-### App base Screenshot
-<img src="screenshot/Capture0.PNG" width="320" height="640" />
 
-### App final Screenshot
-<img src="screenshot/Capture.PNG" width="320" height="640" />
+<img src="screenshot/Capture0.PNG" width="240" height="480" />
+
+<img src="screenshot/Capture.PNG" width="240" height="480" />
 
