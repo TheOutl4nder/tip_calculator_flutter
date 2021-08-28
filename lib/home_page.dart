@@ -10,12 +10,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  _tipCalculation() {
-    // TODO: completar
-  }
-
+  num tip_percentage =0;
+  num tip;
+  num orderTotal;
   bool roundTip = true;
   var tipController = TextEditingController();
+  
+  _tipCalculation() {
+    
+    num subTotal = double.parse(tipController.text ?? '0.0');
+    tip = subTotal * (tip_percentage/100);
+    orderTotal = subTotal + tip;
+    if(roundTip)
+      orderTotal.ceilToDouble();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +78,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
           ),
-          Text("Tip amount: \$20.00"),
+          Text("Tip amount: \$"+tip.toStringAsFixed(2)),
         ],
       ),
     );
