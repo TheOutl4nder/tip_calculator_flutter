@@ -9,6 +9,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Material App',
       home: HomePage(),
+      theme: ThemeData(primarySwatch: Colors.green),
     );
   }
 }
