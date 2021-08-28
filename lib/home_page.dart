@@ -10,19 +10,27 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  num tip_percentage =0;
-  num tip;
-  num orderTotal;
+  num tip_percentage =20;
+  num tip=20;
+  num orderTotal=100;
+  int selection=0;
   bool roundTip = true;
   var tipController = TextEditingController();
+
+  var radioValues={
+    0: "Amazing 20%",
+    1: "Good 18%",
+    2: "Okay 15%"
+  };
   
   _tipCalculation() {
-    
+
     num subTotal = double.parse(tipController.text ?? '0.0');
     tip = subTotal * (tip_percentage/100);
     orderTotal = subTotal + tip;
+
     if(roundTip)
-      orderTotal.ceilToDouble();
+      tip = tip.ceilToDouble();
   }
 
   @override
@@ -53,7 +61,29 @@ class _HomePageState extends State<HomePage> {
             leading: Icon(Icons.dinner_dining),
             title: Text("How was the service?"),
           ),
-          Text("Aqui agregar el GRUPO de radio buttons"),
+          Column( children:
+            radioValues.entries.map((e) => ListTile(
+              leading: Radio(
+                value: e.key,
+                groupValue: selection,
+                onChanged: (newSelection){
+                  switch (e.key) {
+                    case 0:
+                      tip_percentage = 20;
+                      break;
+                    case 1:
+                      tip_percentage = 18;
+                      break;
+                    default:
+                      tip_percentage = 15;
+                  }
+                  setState(() {
+                    selection = newSelection;
+                  });
+                }),
+                title: Text(e.value),
+              )).toList(),
+          ),
           ListTile(
             leading: Icon(Icons.credit_card),
             title: Text("Round up tip"),
@@ -71,7 +101,8 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.green,
                     child: Text("CALCULATE", style: TextStyle(color: Colors.grey[200]),),
                     onPressed: (){
-                      print(tipController.text);
+                      _tipCalculation();
+                      setState(() {});
                     },
                   ),
                 ),
